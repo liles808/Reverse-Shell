@@ -26,17 +26,17 @@ def sc_bind():
 def accept_conn():
     conn, address = s.accept()
     print("Connection established with" + address[0])
-    cmd_exe()
+    cmd_exe(conn)
 
 # Send commands to client
-def cmd_exe():
+def cmd_exe(conn):
     cmd = input();
     if cmd == 'exit':
         conn.close()
         s.close()
         sys.exit()
     else:
-        conn.send(str.encode(input))
+        conn.send(str.encode(cmd))
         response = str(conn.recv(1024), "utf-8")
         print(response)
 
